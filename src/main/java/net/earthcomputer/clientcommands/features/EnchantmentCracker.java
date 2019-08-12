@@ -215,7 +215,7 @@ public class EnchantmentCracker {
                     }
 
                     if (TempRules.infiniteTools && (TempRules.enchCrackState == EnumCrackState.CRACKED || TempRules.enchCrackState == EnumCrackState.CRACKED_PLAYER_SEED)) {
-                        System.out.println("Hello");
+                        //System.out.println("Hello");
                         throwItemsUntil(rand -> {
                             for (int i = 0; i < amount; i++) {
                                 if (stack.getItem() instanceof ArmorItem && playerRand.nextFloat() < 0.6)
