@@ -22,6 +22,8 @@ public class SeedCracker {
     public static int expectedItems=0;
     public static boolean cracking=false;
 
+    public static int tries=0;
+
     //returns True on success or false on failer
     private static boolean throwItems()
     {
@@ -45,7 +47,19 @@ public class SeedCracker {
 
 		if(seed==0)//Basicaly if seed is zero it means it failed to try to crack again
 		{
-			SeedCracker.crack(SeedCracker.callback);
+			if(tries==20)//if its failed 20 times in a row..... something is very wrong
+			{
+				EnchantmentCracker.LOGGER.info("Failed to crack seed after 20 attempts");
+				return;
+			}
+			
+			tries++;
+			callback=Callback;
+        		if(throwItems())
+        		{
+        		    cracking=true;
+        		    expectedItems=20;
+        		}
 			return;
 		}
 		//Else, got a seed
@@ -69,6 +83,7 @@ public class SeedCracker {
 	}
     public static void crack(OnCrack Callback){
         callback=Callback;
+	tries=0;
         if(throwItems())
         {
             cracking=true;
